@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>R-Primer 2</title>
+
+<script src="2-tidyverse_files/header-attrs-2.9/header-attrs.js"></script>
+<script src="2-tidyverse_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="2-tidyverse_files/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="2-tidyverse_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="2-tidyverse_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="2-tidyverse_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="2-tidyverse_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="2-tidyverse_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="2-tidyverse_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="2-tidyverse_files/navigation-1.1/tabsets.js"></script>
+<link href="2-tidyverse_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="2-tidyverse_files/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">R-Primer 2</h1>
+<h3 class="subtitle">Data cleaning, wrangling and plotting with the Tidyverse</h3>
+
+</div>
+
+
+<p>Today, we’ll finally leave base R behind and make our lives much easier by introducing you to the tidyverse. ✨ We think for data cleaning, wrangling, and plotting, the tidyverse really is a no-brainer. A few good reasons for teaching the tidyverse are:</p>
+<ul>
+<li>Outstanding documentation and community support</li>
+<li>Consistent philosophy and syntax</li>
+<li>Convenient “front-end” for more advanced methods</li>
+</ul>
+<p>Read more on this <a href="http://varianceexplained.org/r/teach-tidyverse/">here</a> if you like.</p>
+<p><strong>But</strong>… this certainly shouldn’t put you off learning base R alternatives.</p>
+<ul>
+<li>Base R is extremely flexible and powerful (and stable).</li>
+<li>There are some things that you’ll have to venture outside of the tidyverse for.</li>
+<li>A combination of tidyverse and base R is often the best solution to a problem.</li>
+<li>Excellent base R data manipulation tutorials:</li>
+</ul>
+<p><a href="https://www.rspatial.org/intr/index.html">here</a> and <a href="https://github.com/matloff/fasteR">here</a>.</p>
+<hr />
+<div id="the-tidyverse" class="section level1">
+<h1>The Tidyverse 🔭</h1>
+<p>In general, the <code>tidyverse</code> is a collection of R packages that share an underlying design, syntax, and structure. One very prominent tidyverse package is <code>dplyr</code> for data manipulation.</p>
+<p>In this lab, you will learn to:</p>
+<ul>
+<li>understand what we mean with <code>tidy data</code></li>
+<li>identify the purpose of a set of <code>dplyr</code> verbs</li>
+<li>restructure data with a set of <code>tidyr</code> verbs</li>
+<li>learn about functions and iteration with <code>purrr</code></li>
+</ul>
+</div>
+<div id="tidy-data" class="section level1">
+<h1>Tidy Data 🗂</h1>
+<p>Generally, we will encounter data in a tidy format. Tidy data refers to a way of mapping the structure of a data set. In a tidy data set:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable forms a column.</li>
+<li>Each observation forms a row.</li>
+<li>Each type of observational unit forms a table</li>
+</ol>
+<p><img src="pics/tidy_data.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>Excercise 1</strong></p>
+<pre><code>Think about what you might have learned about panel surveys (surveys fielded to the same set of participants at multiple points of time). Why could this be a problem for the general assumptions of tidy data and what possible data formats can you end up with?</code></pre>
+<hr />
+</div>
+<div id="tidyverse-packages" class="section level1">
+<h1>Tidyverse packages</h1>
+<p>Let’s load the tidyverse meta-package and check the output.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>We see that we have actually loaded a number of packages (which could also be loaded individually): <strong>ggplot2</strong>, <strong>tibble</strong>, <strong>dplyr</strong>, etc. We can also see information about the package versions and some <a href="https://raw.githack.com/uo-ec607/lectures/master/04-rlang/04-rlang.html#59">namespace conflicts</a>.</p>
+<p>The tidyverse actually comes with a lot more packages than those that are just loaded automatically.<sup>1</sup></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_packages</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;broom&quot;         &quot;cli&quot;           &quot;crayon&quot;        &quot;dbplyr&quot;       
+##  [5] &quot;dplyr&quot;         &quot;dtplyr&quot;        &quot;forcats&quot;       &quot;googledrive&quot;  
+##  [9] &quot;googlesheets4&quot; &quot;ggplot2&quot;       &quot;haven&quot;         &quot;hms&quot;          
+## [13] &quot;httr&quot;          &quot;jsonlite&quot;      &quot;lubridate&quot;     &quot;magrittr&quot;     
+## [17] &quot;modelr&quot;        &quot;pillar&quot;        &quot;purrr&quot;         &quot;readr&quot;        
+## [21] &quot;readxl&quot;        &quot;reprex&quot;        &quot;rlang&quot;         &quot;rstudioapi&quot;   
+## [25] &quot;rvest&quot;         &quot;stringr&quot;       &quot;tibble&quot;        &quot;tidyr&quot;        
+## [29] &quot;xml2&quot;          &quot;tidyverse&quot;</code></pre>
+<p>We’ll use several of these additional packages during the remainder of this course.</p>
+<p>E.g. The <strong>lubridate</strong> package for working with dates and the <strong>rvest</strong> package for webscraping. However, these packages will have to be loaded separately!</p>
+<p><img src="pics/kacheln3.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-pipe-operator" class="section level1">
+<h1>The pipe <code>%&gt;%</code> operator</h1>
+<p>The tidyverse loads its a pipe operator, denoted <code>%&gt;%</code>. Using pipes can dramatically improve the experience of reading and writing code. Compare:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## These next two lines of code do exactly the same thing.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> <span class="fu">filter</span>(manufacturer<span class="sc">==</span><span class="st">&quot;audi&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(model) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">hwy_mean =</span> <span class="fu">mean</span>(hwy))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">group_by</span>(<span class="fu">filter</span>(mpg, manufacturer<span class="sc">==</span><span class="st">&quot;audi&quot;</span>), model), <span class="at">hwy_mean =</span> <span class="fu">mean</span>(hwy))</span></code></pre></div>
+<p>The first line reads from left to right, exactly how I thought of the operations in my head. - Take this object (<code>mpg</code>), do this (<code>filter</code>), then do this (<code>group_by</code>), etc.</p>
+<p>The second line totally inverts this logical order (the final operation comes first!) - Who wants to read things inside out?</p>
+<p>The piped version of the code is even more readable if we write it over several lines. Here it is again and, this time, I’ll run it for good measure so you can see the output:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(manufacturer<span class="sc">==</span><span class="st">&quot;audi&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(model) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">hwy_mean =</span> <span class="fu">mean</span>(hwy))</span></code></pre></div>
+<p>Remember: Using vertical space costs nothing and makes for much more readable/writeable code than cramming things horizontally.</p>
+<p>PS — The pipe is originally from the <a href="https://magrittr.tidyverse.org/"><strong>magrittr</strong></a> package, which can do some other cool things if you’re inclined to explore.</p>
+</div>
+<div id="data-manipulation-with-dplyr" class="section level1">
+<h1>Data manipulation with <code>dplyr</code></h1>
+<p>In this tutorial, you’ll learn and practice examples using some functions in <code>dplyr</code> to work with data. Those are:</p>
+<ul>
+<li><code>select()</code>: keep or exclude some columns</li>
+<li><code>filter()</code>: keep rows that satisfy your conditions</li>
+<li><code>mutate()</code>: add columns from existing data or edit existing columns</li>
+<li><code>group_by()</code>: lets you define groups within your data set</li>
+<li><code>summarize()</code>: get summary statistics</li>
+<li><code>arrange()</code>: reorders the rows according to single or multiple variables</li>
+</ul>
+<p>To demonstrate and practice how these verbs (functions) work, we’ll use the penguings dataset.</p>
+<p>The 3 species of penguins in this data set are Adelie, Chinstrap and Gentoo. The data set contains 8 variables:</p>
+<ul>
+<li><strong>species:</strong> a factor denoting the penguin species (Adelie, Chinstrap, or Gentoo)</li>
+<li><strong>island:</strong> a factor denoting the island (in Palmer Archipelago, Antarctica) where observed</li>
+<li><strong>culmen_length_mm:</strong> a number denoting length of the dorsal ridge of penguin bill (millimeters)</li>
+<li><strong>culmen_depth_mm:</strong> a number denoting the depth of the penguin bill (millimeters)</li>
+<li><strong>flipper_length_mm:</strong> an integer denoting penguin flipper length (millimeters)</li>
+<li><strong>body_mass_g:</strong> an integer denoting penguin body mass (grams)</li>
+<li><strong>sex:</strong> a factor denoting penguin sex (MALE, FEMALE)</li>
+<li><strong>year</strong> an integer denoting the year of the record</li>
+</ul>
+<div id="select" class="section level2">
+<h2><code>select()</code></h2>
+<p>The first verb (function) we will utilize is <code>select()</code>. We can employ it to manipulate our data based on <strong>columns</strong>. If you recall from our initial exploration of the data set there were eight variables attached to every observation. Do you recall them? If you do not, there is no problem. You can utilize <code>names()</code> to retrieve the names of the variables in a data frame.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(penguins)</span></code></pre></div>
+<pre><code>## [1] &quot;species&quot;           &quot;island&quot;            &quot;bill_length_mm&quot;   
+## [4] &quot;bill_depth_mm&quot;     &quot;flipper_length_mm&quot; &quot;body_mass_g&quot;      
+## [7] &quot;sex&quot;               &quot;year&quot;</code></pre>
+<p>Say we are only interested in the species, island, and year variables of these data, we can utilize the following syntax:</p>
+<p><code>select(data, columns)</code></p>
+<p><strong>Excercise 2</strong> <em>The following code chunk would select the variables we need. Can you adapt it, so that we keep the body_mass_g and sex variables as well?</em></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(penguins, species, island, year)</span></code></pre></div>
+<p>Good to know: To <strong>drop</strong> variables, use <code>-</code> before the variable name, i.e. select(penguins, -year) to drop the year column (select everything but the year column).</p>
+</div>
+<div id="filter" class="section level2">
+<h2><code>filter()</code> ☕</h2>
+<p>The second verb (function) we will employ is <code>filter()</code>. <code>filter()</code> lets you use a logical test to extract specific <strong>rows</strong> from a data frame. To use <code>filter()</code>, pass it the data frame followed by one or more logical tests. <code>filter()</code> will return every row that passes each logical test.</p>
+<p>The more commonly used logical operators are:</p>
+<ul>
+<li><code>==</code>: Equal to</li>
+<li><code>!=</code>: Not equal to</li>
+<li><code>&gt;</code>, <code>&gt;=</code>: Greater than, greater than or equal to</li>
+<li><code>&lt;</code>, <code>&lt;=</code>: Less than, less than or equal to</li>
+<li><code>&amp;</code>, <code>|</code>: And, or</li>
+</ul>
+<p>Say we are interested in retrieving the observations from the year 2007. We would do:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(penguins, year <span class="sc">==</span> <span class="dv">2007</span>)</span></code></pre></div>
+<p><strong>Excercise 3</strong> Can you adapt the code to retrieve all the observations of Chinstrap penguins from 2007</p>
+<p><strong>Excercise 4</strong> We can leverage the pipe operator to sequence our code in a logical manner. Can you adapt the following code chunck with the pipe and conditional logical operators we discussed?</p>
+<pre><code>only_2009 &lt;- dplyr::filter(penguins, year == 2009)
+only_2009_chinstraps &lt;- dplyr::filter(only_2009, species == &quot;Chinstrap&quot;)
+only_2009_chinstraps_species_sex_year &lt;- dplyr::select(only_2009_chinstraps, species, sex, year)
+final_df &lt;- only_2009_chinstraps_species_sex_year
+final_df #to print it in our console</code></pre>
+</div>
+<div id="mutate" class="section level2">
+<h2><code>mutate()</code> 🌂☂️</h2>
+<p><code>mutate()</code> lets us create, modify, and delete columns. The most common use for now will be to create new variables based on existing ones. Say we are working with a U.S. American client and they feel more confortable with assessing the weight of the penguins in pounds. We would utilize <code>mutate()</code> as such:</p>
+<p><code>mutate(new_var_name = manipulated old_var(s))</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">body_mass_lbs =</span> body_mass_g<span class="sc">/</span><span class="fl">453.6</span>)</span></code></pre></div>
+</div>
+<div id="group_by-and-summarize" class="section level2">
+<h2><code>group_by()</code> and <code>summarize()</code></h2>
+<p>These two verbs <code>group_by()</code> and <code>summarize()</code> tend to go together. When combined , ’summarize()` will create a new data frame. It will have one (or more) rows for each combination of grouping variables; if there are no grouping variables, the output will have a single row summarising all observations in the input. For example:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare this output with the one below</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">heaviest_penguin =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> T)) </span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["heaviest_penguin"],"name":[1],"type":["int"],"align":["right"]}],"data":[{"1":"6300"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">heaviest_penguin =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> T))</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["species"],"name":[1],"type":["fct"],"align":["left"]},{"label":["heaviest_penguin"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Adelie","2":"4775"},{"1":"Chinstrap","2":"4800"},{"1":"Gentoo","2":"6300"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p><strong>Excercise 5</strong> Can you get the weight of the lightest penguin of each species? You can use <code>min()</code>. What happens when in addition to species you also group by year <code>group_by(species, year)</code>?</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(species, year) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">lightest_penguin =</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> T))</span></code></pre></div>
+</div>
+<div id="arrange" class="section level2">
+<h2><code>arrange()</code> 🥚🐣🐥</h2>
+<p>The <code>arrange()</code> verb is pretty self-explanatory. <code>arrange()</code> orders the rows of a data frame by the values of selected columns in ascending order. You can use the <code>desc()</code> argument inside to arrange in descending order. The following chunk arranges the data frame based on the length of the penguins’ bill. You hint tab contains the code for the descending order alternative.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(bill_length_mm)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(bill_length_mm))</span></code></pre></div>
+<p><strong>Excercise 6</strong> Can you create a data frame arranged by body_mass_g of the penguins observed in the “Dream” island?</p>
+<p><strong>Quiz</strong></p>
+<ol style="list-style-type: decimal">
+<li>Which verb allows you to index columns?</li>
+</ol>
+<ul>
+<li>select()</li>
+<li>filter()</li>
+<li>summarize()</li>
+<li>group_by()</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Which verb allows you to index rows?</li>
+</ol>
+<ul>
+<li>select()</li>
+<li>filter()</li>
+<li>summarize()</li>
+<li>group_by()</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><p>How long was the longest observed bill of a Gentoo penguin in 2008?</p></li>
+<li><p>How long was the shortest observed bill of a Gentoo penguin in 2008?</p></li>
+</ol>
+</div>
+<div id="other-dplyr-functions" class="section level2">
+<h2>Other dplyr functions</h2>
+<p><code>ungroup()</code>: For ungrouping data after using the <code>group_by()</code> command - Particularly useful with the <code>summarise</code> and <code>mutate</code> commands, as we’ve already seen.</p>
+<p><code>slice()</code>: Subset rows by position rather than filtering by values. - E.g. <code>penguins %&gt;% slice(c(1, 5))</code></p>
+<p><code>pull()</code>: Extract a column from as a data frame as a vector or scalar. - E.g. <code>penguins %&gt;% filter(gender=="female") %&gt;% pull(height)</code></p>
+<p><code>count()</code> and <code>distinct()</code>: Number and isolate unique observations. - E.g. <code>penguins %&gt;% count(species)</code>, or <code>penguins %&gt;% distinct(species)</code> - You could also use a combination of <code>mutate</code>, <code>group_by</code>, and <code>n()</code>, e.g. <code>penguins %&gt;% group_by(species) %&gt;% mutate(num = n())</code>.</p>
+<p>The final set of dplyr verbs we’d like you to know are the family of join operations. These are important enough that we want to go over some concepts in a bit more depth.</p>
+<p>However - note that we will cover relational data structures (and SQL) in even more depth in a separate lab session!</p>
+</div>
+</div>
+<div id="joins-with-dplyr" class="section level1">
+<h1>Joins with <code>dplyr</code></h1>
+<p>One of the mainstays of the dplyr package is merging data with the family <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html">join operations</a>.</p>
+<ul>
+<li><code>inner_join(df1, df2)</code></li>
+<li><code>left_join(df1, df2)</code></li>
+<li><code>right_join(df1, df2)</code></li>
+<li><code>full_join(df1, df2)</code></li>
+<li><code>semi_join(df1, df2)</code></li>
+<li><code>anti_join(df1, df2)</code></li>
+</ul>
+<p>(You might find it helpful to to see visual depictions of the different join operations <a href="https://r4ds.had.co.nz/relational-data.html">here</a>.)</p>
+<p>For the simple examples that I’m going to show here, we’ll need some data sets that come bundled with the <a href="http://github.com/hadley/nycflights13"><strong>nycflights13</strong></a> package. - Load it now and then inspect these data frames in your own console.</p>
+<p>Let’s perform a <a href="https://stat545.com/bit001_dplyr-cheatsheet.html#left_joinsuperheroes-publishers">left join</a> on the flights and planes datasets. - <em>Note</em>: I’m going subset columns after the join, but only to keep text on the slide.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(flights, planes) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day, dep_time, arr_time, carrier, flight, tailnum, type, model)<span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="do">## Just to save vertical space in output</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["year"],"name":[1],"type":["int"],"align":["right"]},{"label":["month"],"name":[2],"type":["int"],"align":["right"]},{"label":["day"],"name":[3],"type":["int"],"align":["right"]},{"label":["dep_time"],"name":[4],"type":["int"],"align":["right"]},{"label":["arr_time"],"name":[5],"type":["int"],"align":["right"]},{"label":["carrier"],"name":[6],"type":["chr"],"align":["left"]},{"label":["flight"],"name":[7],"type":["int"],"align":["right"]},{"label":["tailnum"],"name":[8],"type":["chr"],"align":["left"]},{"label":["type"],"name":[9],"type":["chr"],"align":["left"]},{"label":["model"],"name":[10],"type":["chr"],"align":["left"]}],"data":[{"1":"2013","2":"1","3":"1","4":"517","5":"830","6":"UA","7":"1545","8":"N14228","9":"NA","10":"NA"},{"1":"2013","2":"1","3":"1","4":"533","5":"850","6":"UA","7":"1714","8":"N24211","9":"NA","10":"NA"},{"1":"2013","2":"1","3":"1","4":"542","5":"923","6":"AA","7":"1141","8":"N619AA","9":"NA","10":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Note that dplyr made a reasonable guess about which columns to join on (i.e. columns that share the same name). It also told us its choices:</p>
+<pre><code>## Joining, by = c(&quot;year&quot;, &quot;tailnum&quot;)</code></pre>
+<p>However, there’s an obvious problem here: the variable “year” does not have a consistent meaning across our joining datasets! - In one it refers to the <em>year of flight</em>, in the other it refers to <em>year of construction</em>.</p>
+<p>Luckily, there’s an easy way to avoid this problem. - Try <code>?dplyr::join</code>.</p>
+<p>You just need to be more explicit in your join call by using the <code>by =</code> argument. - You can also rename any ambiguous columns to avoid confusion.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  flights,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  planes <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">year_built =</span> year), <span class="do">## Not necessary w/ below line, but helpful</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;tailnum&quot;</span> <span class="do">## Be specific about the joining column</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day, dep_time, arr_time, carrier, flight, tailnum, year_built, type, model) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>) </span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["year"],"name":[1],"type":["int"],"align":["right"]},{"label":["month"],"name":[2],"type":["int"],"align":["right"]},{"label":["day"],"name":[3],"type":["int"],"align":["right"]},{"label":["dep_time"],"name":[4],"type":["int"],"align":["right"]},{"label":["arr_time"],"name":[5],"type":["int"],"align":["right"]},{"label":["carrier"],"name":[6],"type":["chr"],"align":["left"]},{"label":["flight"],"name":[7],"type":["int"],"align":["right"]},{"label":["tailnum"],"name":[8],"type":["chr"],"align":["left"]},{"label":["year_built"],"name":[9],"type":["int"],"align":["right"]},{"label":["type"],"name":[10],"type":["chr"],"align":["left"]},{"label":["model"],"name":[11],"type":["chr"],"align":["left"]}],"data":[{"1":"2013","2":"1","3":"1","4":"517","5":"830","6":"UA","7":"1545","8":"N14228","9":"1999","10":"Fixed wing multi engine","11":"737-824"},{"1":"2013","2":"1","3":"1","4":"533","5":"850","6":"UA","7":"1714","8":"N24211","9":"1998","10":"Fixed wing multi engine","11":"737-824"},{"1":"2013","2":"1","3":"1","4":"542","5":"923","6":"AA","7":"1141","8":"N619AA","9":"1990","10":"Fixed wing multi engine","11":"757-223"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Last thing I’ll mention for now; note what happens if we again specify the join column… but don’t rename the ambiguous “year” column in at least one of the given data frames.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  flights,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  planes, <span class="do">## Not renaming &quot;year&quot; to &quot;year_built&quot; this time</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;tailnum&quot;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;year&quot;</span>), month, day, dep_time, arr_time, carrier, flight, tailnum, type, model) <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["year.x"],"name":[1],"type":["int"],"align":["right"]},{"label":["year.y"],"name":[2],"type":["int"],"align":["right"]},{"label":["month"],"name":[3],"type":["int"],"align":["right"]},{"label":["day"],"name":[4],"type":["int"],"align":["right"]},{"label":["dep_time"],"name":[5],"type":["int"],"align":["right"]},{"label":["arr_time"],"name":[6],"type":["int"],"align":["right"]},{"label":["carrier"],"name":[7],"type":["chr"],"align":["left"]},{"label":["flight"],"name":[8],"type":["int"],"align":["right"]},{"label":["tailnum"],"name":[9],"type":["chr"],"align":["left"]},{"label":["type"],"name":[10],"type":["chr"],"align":["left"]},{"label":["model"],"name":[11],"type":["chr"],"align":["left"]}],"data":[{"1":"2013","2":"1999","3":"1","4":"1","5":"517","6":"830","7":"UA","8":"1545","9":"N14228","10":"Fixed wing multi engine","11":"737-824"},{"1":"2013","2":"1998","3":"1","4":"1","5":"533","6":"850","7":"UA","8":"1714","9":"N24211","10":"Fixed wing multi engine","11":"737-824"},{"1":"2013","2":"1990","3":"1","4":"1","5":"542","6":"923","7":"AA","8":"1141","9":"N619AA","10":"Fixed wing multi engine","11":"757-223"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Make sure you know what “year.x” and “year.y” are. Again, it pays to be specific.</p>
+<p>Let’s move on to another important tidyverse package!</p>
+</div>
+<div id="the-tidyr-package" class="section level1">
+<h1>The <code>tidyr</code> package</h1>
+<p>Key tidyr verbs are:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>pivot_longer</code>: Pivot wide data into long format (i.e. “melt”).<sup>1</sup></p></li>
+<li><p><code>pivot_wider</code>: Pivot long data into wide format (i.e. “cast”).<sup>2</sup></p></li>
+<li><p><code>separate</code>: Separate (i.e. split) one column into multiple columns.</p></li>
+<li><p><code>unite</code>: Unite (i.e. combine) multiple columns into one.</p></li>
+</ol>
+<div id="pivot_longer" class="section level2">
+<h2><code>pivot_longer()</code></h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="ot">=</span> <span class="fu">data.frame</span>( <span class="do">## Could use &quot;tibble&quot; instead of &quot;data.frame&quot; if you prefer</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">as.Date</span>(<span class="st">&#39;2009-01-01&#39;</span>) <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Z =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>stocks</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["time"],"name":[1],"type":["date"],"align":["right"]},{"label":["X"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Y"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Z"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2009-01-01","2":"0.9672103","3":"-0.91199303","4":"1.214233"},{"1":"2009-01-02","2":"0.8707327","3":"-0.08732728","4":"3.496278"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>stocks <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">-</span>time, <span class="at">names_to=</span><span class="st">&quot;stock&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;price&quot;</span>)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["time"],"name":[1],"type":["date"],"align":["right"]},{"label":["stock"],"name":[2],"type":["chr"],"align":["left"]},{"label":["price"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2009-01-01","2":"X","3":"0.96721031"},{"1":"2009-01-01","2":"Y","3":"-0.91199303"},{"1":"2009-01-01","2":"Z","3":"1.21423338"},{"1":"2009-01-02","2":"X","3":"0.87073271"},{"1":"2009-01-02","2":"Y","3":"-0.08732728"},{"1":"2009-01-02","2":"Z","3":"3.49627760"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Let’s quickly save the “tidy” (i.e. long) stocks data frame</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Write out the argument names this time: i.e. &quot;names_to=&quot; and &quot;values_to=&quot;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>tidy_stocks <span class="ot">&lt;-</span> stocks <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>time, <span class="at">names_to=</span><span class="st">&quot;stock&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;price&quot;</span>)</span></code></pre></div>
+</div>
+<div id="pivot_wider" class="section level2">
+<h2><code>pivot_wider()</code></h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tidy_stocks <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>stock, <span class="at">values_from=</span>price)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["time"],"name":[1],"type":["date"],"align":["right"]},{"label":["X"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Y"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Z"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2009-01-01","2":"0.9672103","3":"-0.91199303","4":"1.214233"},{"1":"2009-01-02","2":"0.8707327","3":"-0.08732728","4":"3.496278"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>tidy_stocks <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from=</span>time, <span class="at">values_from=</span>price)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["stock"],"name":[1],"type":["chr"],"align":["left"]},{"label":["2009-01-01"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["2009-01-02"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"X","2":"0.9672103","3":"0.87073271"},{"1":"Y","2":"-0.9119930","3":"-0.08732728"},{"1":"Z","2":"1.2142334","3":"3.49627760"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Note that the second example; which has combined different pivoting arguments; has effectively transposed the data.</p>
+</div>
+<div id="tidyrseparate" class="section level2">
+<h2><code>tidyr::separate()</code> 💔</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>economists <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Adam.Smith&quot;</span>, <span class="st">&quot;Paul.Samuelson&quot;</span>, <span class="st">&quot;Milton.Friedman&quot;</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>economists</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Adam.Smith"},{"1":"Paul.Samuelson"},{"1":"Milton.Friedman"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>economists <span class="sc">%&gt;%</span> <span class="fu">separate</span>(name, <span class="fu">c</span>(<span class="st">&quot;first_name&quot;</span>, <span class="st">&quot;last_name&quot;</span>)) </span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["first_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["last_name"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Adam","2":"Smith"},{"1":"Paul","2":"Samuelson"},{"1":"Milton","2":"Friedman"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>This command is pretty smart. But to avoid ambiguity, you can also specify the separation character with <code>separate(..., sep=".")</code>.</p>
+<p>A related function is <code>separate_rows</code>, for splitting up cells that contain multiple fields or observations (a frustratingly common occurence with survey data).</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>jobs <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Jack&quot;</span>, <span class="st">&quot;Jill&quot;</span>),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">occupation =</span> <span class="fu">c</span>(<span class="st">&quot;Homemaker&quot;</span>, <span class="st">&quot;Philosopher, Philanthropist, Troublemaker&quot;</span>) </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>jobs</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["occupation"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Jack","2":"Homemaker"},{"1":"Jill","2":"Philosopher, Philanthropist, Troublemaker"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Now split out Jill&#39;s various occupations into different rows</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>jobs <span class="sc">%&gt;%</span> <span class="fu">separate_rows</span>(occupation)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["occupation"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Jack","2":"Homemaker"},{"1":"Jill","2":"Philosopher"},{"1":"Jill","2":"Philanthropist"},{"1":"Jill","2":"Troublemaker"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="tidyrunite" class="section level2">
+<h2><code>tidyr::unite()</code> ❤️</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>gdp <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">yr =</span> <span class="fu">rep</span>(<span class="dv">2016</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mnth =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dy =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gdp =</span> <span class="fu">rnorm</span>(<span class="dv">4</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>gdp </span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["yr"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["mnth"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["dy"],"name":[3],"type":["int"],"align":["right"]},{"label":["gdp"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2016","2":"1","3":"1","4":"96.77482"},{"1":"2016","2":"1","3":"2","4":"98.40883"},{"1":"2016","2":"1","3":"3","4":"100.20649"},{"1":"2016","2":"1","3":"4","4":"95.92882"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Combine &quot;yr&quot;, &quot;mnth&quot;, and &quot;dy&quot; into one &quot;date&quot; column</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>gdp <span class="sc">%&gt;%</span> <span class="fu">unite</span>(date, <span class="fu">c</span>(<span class="st">&quot;yr&quot;</span>, <span class="st">&quot;mnth&quot;</span>, <span class="st">&quot;dy&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["chr"],"align":["left"]},{"label":["gdp"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2016-1-1","2":"96.77482"},{"1":"2016-1-2","2":"98.40883"},{"1":"2016-1-3","2":"100.20649"},{"1":"2016-1-4","2":"95.92882"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Note that <code>unite</code> will automatically create a character variable. You can see this better if we convert it to a tibble.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>gdp_u <span class="ot">=</span> gdp <span class="sc">%&gt;%</span> <span class="fu">unite</span>(date, <span class="fu">c</span>(<span class="st">&quot;yr&quot;</span>, <span class="st">&quot;mnth&quot;</span>, <span class="st">&quot;dy&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>gdp_u</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["chr"],"align":["left"]},{"label":["gdp"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2016-1-1","2":"96.77482"},{"1":"2016-1-2","2":"98.40883"},{"1":"2016-1-3","2":"100.20649"},{"1":"2016-1-4","2":"95.92882"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>If you want to convert it to something else (e.g. date or numeric) then you will need to modify it using <code>mutate</code>. See below for an example, using the <a href="https://lubridate.tidyverse.org/">lubridate</a> package’s super helpful date conversion functions.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>gdp_u <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">ymd</span>(date))</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["date"],"name":[1],"type":["date"],"align":["right"]},{"label":["gdp"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2016-01-01","2":"96.77482"},{"1":"2016-01-02","2":"98.40883"},{"1":"2016-01-03","2":"100.20649"},{"1":"2016-01-04","2":"95.92882"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<hr />
+</div>
+</div>
+<div id="plotting-with-ggplot2" class="section level1">
+<h1>Plotting with <code>ggplot2</code></h1>
+<p><code>ggplot2</code> is by far the most popular visualization package in <strong>R</strong>. <code>ggplot2</code> implements the <strong>grammar of graphics</strong> to render a versatile syntax of creating visuals. The underlying logic of the package relies on deconstructing the structure of graphs (if you are interested in this you can read this <a href="http://vita.had.co.nz/papers/layered-grammar.pdf">article</a>). You can access the data visualization with <code>ggplot2</code> cheat sheet <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">here</a>.</p>
+<p>For the purposes of this introduction to visualization with ggplot, we care about the layered nature of visualizing with <code>ggplot2</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/54796579/94537983-b94fa100-0243-11eb-8d12-c2e685141092.png" width="70%" style="display: block; margin: auto;" /></p>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The first building block for our plots are the data we intend to map. In <code>ggplot2</code>, we always have to specify the object where our data lives. In other words, you will always have to specify a data frame, as such:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(name_of_your_df)</span></code></pre></div>
+<p>In the future, we will see how to combine multiple data sources to build a single plot. For now, we will work under the assumption that all your data live in the same object.</p>
+<hr />
+</div>
+<div id="aesthetics" class="section level2">
+<h2>Aesthetics</h2>
+<p>The second building block for our plots are the aesthetics. We need to specify the variables in the data frame we will be using and what role they play.</p>
+<p>To do this we will use the function <code>aes()</code> within the <code>ggplot()</code> function after the data frame <strong>(remember to add a comma after the data frame)</strong>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(name_of_your_df, <span class="fu">aes</span>(<span class="at">x =</span> your_x_axis_variable, <span class="at">y =</span> your_y_axis_variable))</span></code></pre></div>
+<p>Beyond your axis, you can add more aesthetics representing further dimensions of the data in the two dimensional graphic plane, such as: size, color, fill, to name but a few.</p>
+<hr />
+</div>
+<div id="geometric-objects" class="section level2">
+<h2>Geometric objects</h2>
+<p>The third layer to render our graph is a geomethic object. To add one, we need to add a plus (<strong>+</strong>) at the end of the initial line and state the type of geometric object we want to add, for example, <code>geom_point()</code> for a scatter plot, or <code>geom_bar()</code> for barplots.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(name_of_your_df, <span class="fu">aes</span>(<span class="at">x =</span> your_x_axis_variable, <span class="at">y =</span> your_y_axis_variable)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<hr />
+</div>
+<div id="theme-graph-appearance" class="section level2">
+<h2>Theme &amp; graph appearance 💅</h2>
+<p>At this point our plot may just need some final thouches. We may want to fix the axes names or get rid of the default gray background. To do so, we need to add an additional layer preceded by a plus sign (+).</p>
+<p>If we want to change the names in our axes, we can utilize the <code>labs()</code> function.</p>
+<p>We can also employ some of the pre-loaded themes, for example, <code>theme_minimal()</code>.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(name_of_your_df, <span class="fu">aes</span>(<span class="at">x =</span> your_x_axis_variable, <span class="at">y =</span> your_y_axis_variable)) <span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Name you want displayed&quot;</span>,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Name you want displayed&quot;</span>)</span></code></pre></div>
+<hr />
+<div id="our-first-plot" class="section level3">
+<h3>Our first plot 🎨</h3>
+<p>For our very first plot using <code>ggplot2</code>, we will use the <code>penguins</code> data again.</p>
+<p>We would like to create a scatterplot that illustrates the relationship between the length of a penguin’s flipper and their weight.</p>
+<p>To do so, we need three of our building blocks: a) data, b) aesthetics, and c) a geometric object (<code>geom_point()</code>).</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y=</span>body_mass_g)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="2-tidyverse_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<hr />
+</div>
+</div>
+<div id="plotting-distributions" class="section level2">
+<h2>Plotting distributions 📊</h2>
+<p>If we are interested in plotting distributions of our data, we can leverage geometric objects, such as:</p>
+<ul>
+<li><code>geom_histogram()</code>: visualizes the distribution of a single continuous variable by dividing the x axis into bins and counting the number of observations in each bin (the default is 30 bins).</li>
+<li><code>geom_density()</code>: computes and draws kernel density estimate, which is a smoothed version of the histogram.</li>
+<li><code>geom_bar()</code>: renders barplots and in plotting distributions behaves in a very similar way from <code>geom_histogram()</code> (can also be used with two dimensions)</li>
+</ul>
+<p>This is a histogram presenting the weight distribution of penguins in our sample. .</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="2-tidyverse_files/figure-html/distribution-plot-1.png" width="672" /></p>
+<hr />
+<p><strong>Exercise</strong>: Let’s adapt the code of our histogram:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>add <code>bins = 15</code> argument type different numbers)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>add <code>fill = "#FF6666"</code> (type “red”, “blue”, instead of #FF6666)</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>change the geom to <code>_density</code> and <code>_bar</code></li>
+</ol></li>
+</ul>
+<hr />
+</div>
+<div id="comparing-groups" class="section level2">
+<h2>Comparing groups 🍎🍐</h2>
+<p>For example, this boxplot showcasing the distribution of weight by species:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Body mass (g)&quot;</span>)</span></code></pre></div>
+<p><img src="2-tidyverse_files/figure-html/box-plot-1.png" width="672" /></p>
+</div>
+<div id="plotting-relationships" class="section level2">
+<h2>Plotting relationships 🤝</h2>
+<p>We can utilize graphs to explore how different variables are related. In fact, we did so before in our scatterplot. Or in this adaptation of our initial plot with a line of best fit for the observed data by each species:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x=</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Length of the flipper&quot;</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Body mass (g)&quot;</span>,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<p><img src="2-tidyverse_files/figure-html/relationship-plot-1.png" width="672" /></p>
+<hr />
+</div>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions 🚀</h1>
+<p>Functions allow you to automate tasks in a more powerful and general way than copy-and-pasting. Writing a function has three big advantages over using copy-and-paste:</p>
+<ol style="list-style-type: decimal">
+<li><p>You can give a function an evocative name that makes your code easier to understand.</p></li>
+<li><p>As requirements change, you only need to update code in one place, instead of many.</p></li>
+<li><p>You eliminate the chance of making incidental mistakes when you copy and paste (i.e. updating a variable name in one place, but not in another).</p></li>
+</ol>
+<p>You can read more on functions in <a href="https://r4ds.had.co.nz/functions.html#functions">this section</a> of R for Data Science.</p>
+<p>Generally, how does code look like that calls for writing a function? For example like this:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">5</span>, <span class="dv">2</span>),</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>),</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">36</span>, <span class="dv">7</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>a <span class="ot">&lt;-</span> (df<span class="sc">$</span>a <span class="sc">-</span> <span class="fu">mean</span>(df<span class="sc">$</span>a, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(df<span class="sc">$</span>a, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>b <span class="ot">&lt;-</span> (df<span class="sc">$</span>b <span class="sc">-</span> <span class="fu">mean</span>(df<span class="sc">$</span>b, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(df<span class="sc">$</span>a, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># spot the mistake?</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>c <span class="ot">&lt;-</span> (df<span class="sc">$</span>c <span class="sc">-</span> <span class="fu">mean</span>(df<span class="sc">$</span>c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(df<span class="sc">$</span>c, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>d <span class="ot">&lt;-</span> (df<span class="sc">$</span>d <span class="sc">-</span> <span class="fu">mean</span>(df<span class="sc">$</span>d, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="fu">sd</span>(df<span class="sc">$</span>d, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>There are three key steps to creating a new function:</p>
+<ol style="list-style-type: decimal">
+<li><p>Pick a <strong>name</strong> for the function. For us it could be zscale because this function rescales (or z-transforms) a vector to have a mean of 0 and a standard deviation of 1.</p></li>
+<li><p>You list the <strong>inputs</strong>, or <strong>arguments</strong>, to the function inside function. Here we have just one argument. If we had more the call would look like function(x, y, z).</p></li>
+<li><p>You place the code you have developed in <strong>body</strong> of the function, a { block that immediately follows function(…).</p></li>
+</ol>
+<p>The overall structure of a function looks like this in R:</p>
+<pre><code>function_name &lt;- function(input_parameters){
+  Do what you want to do in the body of the
+  function, just like you would write other code in R.
+}</code></pre>
+<p>In our example, we could simplify the z-transformation of 4 variables with this function:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>zscale <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> T))</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>A word on <strong>function names</strong>. Generally, function names should be verbs, and arguments should be nouns. There are some exceptions: nouns are ok if the function computes a very well known noun (i.e. mean), or accessing some property of an object (i.e. coefficients). A good sign that a noun might be a better choice is if you’re using a very broad verb like “get”, “compute”, “calculate”, or “determine”. Where possible, avoid overriding existing functions and variables. However, many good names are already taken by other packages, but avoiding the most common names from base R will avoid confusion.</p>
+<p>Also, we did not focus at all on function documentation today. In case you are interested, this is a good package to <a href="https://cran.r-project.org/web/packages/docstring/vignettes/docstring_intro.html">start</a>!</p>
+<div id="conditions" class="section level2">
+<h2>Conditions</h2>
+<p>You can of course also add conditions to your function.</p>
+<pre><code>if (this) {
+  # do that
+} else if (that) {
+  # do something else
+} else {
+  # 
+}</code></pre>
+<p>You could, for example, only transform numeric variables.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>zscale <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.numeric</span>(x)) {</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> T))</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>We can now apply our function to any variable that we would like to transform.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>a)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>b)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>c <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>c)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>d <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>d)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># you can also use your function with a pipe!</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>d <span class="sc">%&gt;%</span> <span class="fu">zscale</span>()</span></code></pre></div>
+<p>Note that there is still a lot of repetition. We can get rid of this using iteration 👇</p>
+<hr />
+</div>
+</div>
+<div id="iteration" class="section level1">
+<h1>Iteration</h1>
+<p>Iteration helps you when you need to do the same thing to multiple inputs: repeating the same operation on different columns, or on different datasets.</p>
+<p>On the one hand, you have for loops and while loops which are a great place to start because they make iteration very explicit. On the other hand, functional programming (FP) offers tools to extract out duplicated code, so each common for loop pattern gets its own function.</p>
+<p>Remember the code above - it violates the rule of thumb that you should not copy and paste more than twice.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># repetitive code</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>a)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>b)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>c <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>c)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>d <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df<span class="sc">$</span>d)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># equivalent iteration</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(df)) {       <span class="co"># seq_along() similar to length()</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  df[[i]] <span class="ot">&lt;-</span> <span class="fu">zscale</span>(df[[i]])     <span class="co"># [[]] because we are working on single elements</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>To solve problems like this one with a for loop we again think about the three components:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Output:</strong> we already have the output — it’s the same as the input because we are modifying data. If that is not the case, make sure to define a space where the output should go (e.g. an empty vector). If the length of your vector is unknown, you might be tempted to solve this problem by progressively growing the vector. However, this is not very efficient because in each iteration, R has to copy all the data from the previous iterations. In technical terms you get “quadratic” (O(n^2)) behaviour which means that a loop with three times as many elements would take nine (3^2) times as long to run. A better solution to save the results in a list, and then combine into a single vector after the loop is done. See more on this <a href="https://r4ds.had.co.nz/iteration.html">here</a>.</p></li>
+<li><p><strong>Sequence:</strong> we can think about a data frame as a list of columns, so we can iterate over each column with seq_along(df).</p></li>
+<li><p><strong>Body:</strong> apply zscale() or any other function.</p></li>
+</ol>
+<div id="functionals" class="section level2">
+<h2>Functionals 🐱</h2>
+<p>For loops are not as important in R as they are in other languages because R is a functional programming language. This means that it’s possible to wrap up for loops in a function, and call that function instead of using the for loop directly. 💡</p>
+<p>The <code>purrr</code> package provides functions that eliminate the need for many common for loops. The apply family of functions in base R (apply(), lapply(), tapply(), etc) solve a similar problem, but purrr is more consistent and thus is easier to learn.</p>
+<p>The pattern of looping over a vector, doing something to each element and saving the results is so common that the purrr package provides a family of functions to do it for you. There is one function for each type of output:</p>
+<ul>
+<li><code>map()</code> makes a list.</li>
+<li><code>map_lgl()</code> makes a logical vector.</li>
+<li><code>map_int()</code> makes an integer vector.</li>
+<li><code>map_dbl()</code> makes a double vector.</li>
+<li><code>map_chr()</code> makes a character vector.</li>
+</ul>
+<p>Each function takes a vector as input, applies a function to each piece, and then returns a new vector that’s the same length (and has the same names) as the input. The type of the vector is determined by the suffix to the map function.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># repetitive code</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>a)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>b)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>c)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>d)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co"># equivalent map function</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df,mean)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># map function in tidyverse style</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(mean)</span></code></pre></div>
+<p>There is, of course, much more to learn about functions in R and we could dedicate an entire session to it. For now, consider this as is the first exposure to functions (that can actually already get you pretty far). However, it is important that you apply 🤓 you new skills and practice further on your own. A good starting point is obviously <em>assignment 2 that is due October 6, 11pm</em>. Good luck! 🤞</p>
+</div>
+<div id="actually-learning-r" class="section level2">
+<h2>Actually learning R 🎒</h2>
+<p>Let us remind you again, the key to learning <code>R</code> is: <strong>Google</strong>! We can only give you an overview over basic <code>R</code> functions, but to really learn <code>R</code> you will have to actively use it yourself, trouble shoot, ask questions, and google! It is very likely that someone else has had the exact same or just <em>similar enough</em> issue before and that the R community has answered it with 5+ different solutions years ago. 😉</p>
+<hr />
+</div>
+</div>
+<div id="sources" class="section level1 unnumbered">
+<h1 class="unnumbered">Sources</h1>
+<p>This tutorial is partly based on <a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a>, section 5.2, <a href="http://qpolr.com/data.html/"><em>Quantitative Politics with R</em></a>, chapter 3; the <a href="https://github.com/uo-ec607/lectures/tree/master/05-tidyverse">Tidyverse Session</a> in the course Data Science for Economists by Grant McDermott, as well as chapters 7 to 10 from the <a href="http://qpolr.com/dataviz.html">QPOLR book</a> and <a href="https://link.springer.com/book/10.1007/0-387-28695-0">Wilkinson, L., 2012. The grammar of graphics</a>. In Handbook of Computational Statistics (pp. 375-414). Springer, Berlin, Heidelberg.</p>
+</div>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 6.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Menlo; color: #000000; -webkit-text-stroke: #000000}
+    p.p4 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Menlo; color: #5a5a5a; -webkit-text-stroke: #5a5a5a}
+    p.p5 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Menlo; color: #0000e9; -webkit-text-stroke: #0000e3}
+    p.p6 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: center; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {text-decoration: underline ; font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p2"><span class="s1"><br>
+</span></p>
+<p class="p3"><span class="s1">A work by Lisa Oswald<span class="Apple-converted-space"> </span></span></p>
+<p class="p4"><span class="s1"><i>Prepared for Statistical Modeling &amp; Causal Inference, taught by Simon Munzert</i></span></p>
+<p class="p5"><span class="s2"><a href="https://www.hertie-school.org/en/"><i>Hertie School, Berlin</i></a></span></p>
+<p class="p6"><span class="s1"><br>
+</span></p>
+<p class="p1"><span class="s1"> <span class="Apple-converted-space"> </span></span></p>
+</body>
+</html>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

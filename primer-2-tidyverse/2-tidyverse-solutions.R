@@ -8,11 +8,11 @@ library(palmerpenguins)
 ## ---------------------------------------------------------------------------------------------------
 tidyverse_packages()
 
+summarise(group_by(filter(mpg, manufacturer=="audi"), model), hwy_mean = mean(hwy))
 
 
 mpg %>% filter(manufacturer=="audi") %>% group_by(model) %>% summarise(hwy_mean = mean(hwy))
 
-summarise(group_by(filter(mpg, manufacturer=="audi"), model), hwy_mean = mean(hwy))
 
 mpg %>%
    filter(manufacturer=="audi") %>%
@@ -21,32 +21,36 @@ mpg %>%
 
 
 ## ---------------------------------------------------------------------------------------------------
+penguins <- penguins
 names(penguins)
 
 ## EX2 ---------------------------------------------------------------------------------------------------
 dplyr::select(penguins, species, island, year, body_mass_g, sex)
 
+penguins %>%
+  select(species : sex)
+
 
 ## EX3 ----------------------------------------------------------------------------------------
-dplyr::filter(penguins, year == 2007 & species == "Chinstrap")
 
+p_new <- penguins%>%
+  dplyr::filter(year == 2007 | year == 2009)
 
 
 ## EX4 ----------------------------------------------------------------------------
-penguins %>%
+p_new <- penguins %>%
   dplyr::filter(year == 2009 & species == "Chinstrap") %>%
   dplyr::select(species, sex, year)
 
 
 ## ---------------------------------------------------------------------------------------------------
-penguins %>%
-  dplyr::mutate(body_mass_lbs = body_mass_g/453.6)
+p_new %>%
+  dplyr::mutate(body_mass_g = body_mass_g/453.6)
 
 ## ---------------------------------------------------------------------------------------------------
 # compare this output with the one below
 penguins %>%
   dplyr::summarize(heaviest_penguin = max(body_mass_g, na.rm = T)) 
-
 
 ## ---------------------------------------------------------------------------------------------------
 penguins %>%
@@ -63,16 +67,16 @@ penguins %>%
 ## EX6-------------------------------------------------------------------------------------------
 penguins %>%
   dplyr::filter(island == "Dream") %>%
-  dplyr::arrange(body_mass_g)
+  dplyr::arrange(desc(body_mass_g))
 
 
 ## Quiz
 penguins %>%
-  filter(species == "Gentoo" & year == 2008)%>%
+  dplyr::filter(species == "Gentoo" & year == 2008)%>%
   dplyr::arrange(desc(bill_length_mm))
 
 penguins %>%
-  filter(species == "Gentoo" & year == 2008)%>%
+  dplyr::filter(species == "Gentoo" & year == 2008)%>%
   dplyr::arrange(bill_length_mm)
 
 
@@ -80,8 +84,8 @@ penguins %>%
 
 ## -----------------------------------------------------------------------------------------
 library(nycflights13)
-#flights 
-#planes
+names(flights)
+names(planes)
 
 
 ## ---------------------------------------------------------------------------------------------------
@@ -118,6 +122,7 @@ stocks = data.frame( ## Could use "tibble" instead of "data.frame" if you prefer
   Z = rnorm(2, 0, 4)
   )
 stocks
+
 stocks %>% pivot_longer(-time, names_to="stock", values_to="price")
 
 
@@ -135,7 +140,7 @@ tidy_stocks %>% pivot_wider(names_from=time, values_from=price)
 ## ----sep1-------------------------------------------------------------------------------------------
 economists = data.frame(name = c("Adam.Smith", "Paul.Samuelson", "Milton.Friedman"))
 economists
-economists %>% separate(name, c("first_name", "last_name")) 
+economists %>% separate(name, c("first_name", "last_name"), sep = ".") 
 
 
 ## ----sep2-------------------------------------------------------------------------------------------
@@ -145,6 +150,7 @@ jobs = data.frame(
   ) 
 jobs
 ## Now split out Jill's various occupations into different rows
+
 jobs %>% separate_rows(occupation)
 
 
@@ -171,7 +177,7 @@ gdp_u %>% mutate(date = ymd(date))
 
 
 #########################################################################################
-
+library(ggplot2)
 ## ---------------------------------------------------------------------------------------------------
 ggplot(penguins, aes(x = flipper_length_mm, y=body_mass_g)) +
   geom_point()
@@ -179,7 +185,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y=body_mass_g)) +
 
 ## ------------------------------------------------------------------------------------------------------
 ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram()
+  geom_density(bins = 60, colour = "red", fill = "blue")
 
 
 ## EX ------------------------------------------------------------------------------------------------------
@@ -193,15 +199,21 @@ ggplot(penguins, aes(x = body_mass_g)) +
 ## ---------------------------------------------------------------------------------------------------------------------
 ggplot(penguins, aes(x = species, y = body_mass_g)) +
   geom_boxplot() +
+  geom_jitter(alpha = 0.3, colour = "blue") +
   theme_minimal() +
+  ggtitle("Plot")+
   labs(x = "Species",
        y = "Body mass (g)")
 
 
 ## ------------------------------------------------------------------------------------------------
+ggplot(penguins, aes(x = flipper_length_mm, y=body_mass_g)) +
+  geom_point()
+
+
 ggplot(penguins, aes(x= flipper_length_mm, y = body_mass_g, color = species)) +
   geom_point() + 
-  geom_smooth(method = "lm", se = F) +
+  geom_smooth(method = "lm", se = T) +
   theme_minimal() +
   labs(x = "Length of the flipper",
        y = "Body mass (g)",

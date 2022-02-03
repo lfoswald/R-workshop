@@ -2,7 +2,7 @@
 
 ## BASICS
 ## --------------------------------------------------------------------------------------------
-4*9
+4*91 
 sqrt(144)
 
 
@@ -133,7 +133,7 @@ cname[1]
 
 
 ## --------------------------------------------------------------------------------------------
-pop[c(2,5)]
+pop[2:5]
 cname[c(2,5)]
 
 
@@ -147,6 +147,7 @@ cname_copy <- cname
 cname_copy[-5]
 ## Option 2 (for generalizability): Getting the last element and dropping it.
 length(cname_copy)
+
 cname_copy[-length(cname_copy)]
 
 
@@ -264,10 +265,10 @@ mydata[c(1,2), ]
 
 ## --------------------------------------------------------------------------------------------
 mydata[1:5,]
-
+head(mydata,5)
 
 ## --------------------------------------------------------------------------------------------
-mydata[3,7]
+mydata[3,4]
 
 # EX 10
 ##-------------------------------------------------------------------------------
@@ -282,8 +283,10 @@ mydata[100,3]
 ## --------------------------------------------------------------------------------------------
 mydata$nconflict
 
+mydata[ ,5]
 
 ## --------------------------------------------------------------------------------------------
+mydata$region
 table(mydata$region)
 
 
@@ -304,6 +307,7 @@ max(mydata$nconflict)
 ## -------------------------------------------------------------------------------
 mydata$country[mydata$nconflict == max(mydata$nconflict)]
 
+
 # EX 15
 ## -------------------------------------------------------------------------------
 head(mydata$country[seq(1, length(mydata$country), 2)])
@@ -311,7 +315,7 @@ head(mydata$country[seq(1, length(mydata$country), 2)])
 
 ## --------------------------------------------------------------------------------------------
 vec <- c(4, 1, 2, NA, 3)
-mean(vec) #Result is NA!
+mean(vec) #Result is NA! 
 sum(vec) #Result is NA!
 
 
@@ -328,8 +332,9 @@ dim(mydata_new)
 
 ## --------------------------------------------------------------------------------------------
 mydata$nconflict_fatalities <- mydata$nconflict - mydata$nconflict_no_fatalities
-head(mydata, 3) #prints out the first 3 rows of the data frame
 
+head(mydata, 3) #prints out the first 3 rows of the data frame
+dim(mydata)
 
 ## --------------------------------------------------------------------------------------------
 mydata$av_fatalities <- mydata$fatalities/mydata$nconflict

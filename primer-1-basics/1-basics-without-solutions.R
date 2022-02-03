@@ -11,6 +11,7 @@ sqrt(144)
 4 <= 2
 
 
+
 ## --------------------------------------------------------------------------------------------
 result <- 5/3
 result
@@ -18,7 +19,7 @@ result
 
 ## --------------------------------------------------------------------------------------------
 my_vector <- c(1, 2, 3)
-my_character_vector <- c("Welcome", "everyone")
+my_character_vector <- c("Welcome", "1")
 
 length(my_vector)
 str(my_character_vector)
@@ -26,18 +27,23 @@ str(my_character_vector)
 
 ## --------------------------------------------------------------------------------------------
 my_matrix <- matrix(nrow=3, ncol=3)
+
+str(mat)
 dim(my_matrix)
 
 
 ## --------------------------------------------------------------------------------------------
 my_list <- list(1, "a", TRUE)
+my_list
 my_list[2]
 my_list[[2]]
 
+my_vec <- c("a", "b", "c")
+my_vec[2]
 
 ## --------------------------------------------------------------------------------------------
 my_df <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
-
+str(my_df)
 
 ## --------------------------------------------------------------------------------------------
 # direct creation of factors
@@ -48,6 +54,15 @@ my_vector <- c("single","single","married","married","single")
 my_factor <- as.factor(my_vector)
 
 levels(my_factor)
+
+
+##----
+matrix(nrow = 3, ncol = 3)
+matrix(nrow = 3, ncol = 3, 1)
+
+df <- data.frame(a = c(1,2,3), b = c(4,5,6), c = c(7,8,9))
+mat <- as.matrix(df)
+mat    
 
 
 ## VECTORS

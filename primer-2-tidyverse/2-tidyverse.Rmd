@@ -503,7 +503,7 @@ gdp_u %>% mutate(date = ymd(date))
 
 # Plotting with `ggplot2`
 
-`ggplot2` is by far the most popular visualization package in **R**. `ggplot2` implements the **grammar of graphics** to render a versatile syntax of creating visuals. The underlying logic of the package relies on deconstructing the structure of graphs (if you are interested in this you can read this [article](http://vita.had.co.nz/papers/layered-grammar.pdf)). You can access the data visualization with `ggplot2` cheat sheet [here](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
+`ggplot2` is by far the most popular visualization package in **R**. `ggplot2` implements the **grammar of graphics** to render a versatile syntax of creating visuals. The underlying logic of the package relies on deconstructing the structure of graphs (if you are interested in this you can read this [article](http://vita.had.co.nz/papers/layered-grammar.pdf)). You can access the data visualization with `ggplot2` cheat sheet [here](https://www.rstudio.com/resources/cheatsheets/).
 
 For the purposes of this introduction to visualization with ggplot, we care about the layered nature of visualizing with `ggplot2`.
 

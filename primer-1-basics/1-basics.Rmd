@@ -633,7 +633,7 @@ head(mydata[, "country"])
 max(mydata$nconflict)
 ```
 
-**Exercise 14**: Print the country that corresponds to the maximum world population value using the `$` operator and indexing!
+**Exercise 14**: Print the country that corresponds to the maximum number of conflicts value using the `$` operator and indexing!
 ```{r, echo = F}
 mydata$country[mydata$nconflict == max(mydata$nconflict)]
 ```
